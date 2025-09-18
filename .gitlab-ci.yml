@@ -1,0 +1,22 @@
+stages:
+  - install
+  - test
+
+# Install dependencies
+install_dependencies:
+  stage: install
+  image: cypress/browsers:node12.18.3-chrome85-ff82  # Use Cypress browser image
+  script:
+    - npm install
+
+# Run Cypress tests
+cypress_tests:
+  stage: test
+  image: cypress/browsers:node12.18.3-chrome85-ff82
+  script:
+    - npx cypress run
+  artifacts:
+    paths:
+      - cypress/screenshots
+      - cypress/videos
+    expire_in: 1 hour
