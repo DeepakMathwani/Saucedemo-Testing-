@@ -12,7 +12,6 @@ describe(' Test Suite for the new testing' , () =>
             cy.get('[placeholder="Username"]').type('standard_user')
             cy.get('[placeholder="Password"]').type('secret_sauce')              
             cy.get('.submit-button.btn_action').click()  
-    
             cy.get(".btn.btn_primary.btn_small.btn_inventory").eq(0).click()
             cy.get('[data-test="add-to-cart-sauce-labs-bolt-t-shirt"]').click()
             cy.get('[data-test="add-to-cart-sauce-labs-fleece-jacket"]').click()
