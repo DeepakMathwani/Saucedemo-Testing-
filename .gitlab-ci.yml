@@ -1,22 +1,67 @@
+# stages:
+#   - install
+#   - test
+
+# # Install dependencies
+# install_dependencies:
+#   stage: install
+#   image: cypress/browsers:node12.18.3-chrome85-ff82  # Use Cypress browser image
+#   script:
+#     - npm install
+
+# # Run Cypress tests
+# cypress_tests:
+#   stage: test
+#   image: cypress/browsers:node12.18.3-chrome85-ff82
+#   script:
+#     - npx cypress run
+#   only:
+#     - main
+#     - master  
+#   artifacts:
+#     paths:
+#       - cypress/screenshots
+#       - cypress/videos
+#     expire_in: 1 hour
+
+
 stages:
   - install
   - test
 
-# Install dependencies
-install_dependencies:
+# For the first project (on main branch)
+install_dependencies_main:
   stage: install
-  image: cypress/browsers:node12.18.3-chrome85-ff82  # Use Cypress browser image
+  image: cypress/browsers:node12.18.3-chrome85-ff82
   script:
     - npm install
+  only:
+    - main  # Runs on the 'main' branch
 
-# Run Cypress tests
-cypress_tests:
+# Run Cypress tests for the first project
+cypress_tests_main:
   stage: test
   image: cypress/browsers:node12.18.3-chrome85-ff82
   script:
     - npx cypress run
-  artifacts:
-    paths:
-      - cypress/screenshots
-      - cypress/videos
-    expire_in: 1 hour
+  only:
+    - main  # Runs on the 'main' branch
+
+# For the second project (on master branch)
+install_dependencies_master:
+  stage: install
+  image: cypress/browsers:node12.18.3-chrome85-ff82
+  script:
+    - npm install
+  only:
+    - master  # Runs on the 'master' branch
+
+# Run Cypress tests for the second project
+cypress_tests_master:
+  stage: test
+  image: cypress/browsers:node12.18.3-chrome85-ff82
+  script:
+    - npx cypress run
+  only:
+    - master  # Runs on the 'master' branch
+
